@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <title>FADENBREMSE</title>
+    </head>
+    <body onload="init();" id="body">
+        <!-- LED MODES -->
+        <button id="buttonSingleColor">single</button>
+        <button id="buttonBlinkLine">blink</button>
+        <button id="buttonBlend">blend</button>
+        <!-- toggle control Mode -->
+        <!-- <button id="manualButton">MANUAL MODE</button>
+        <button id="autoButton">AUTO MODE</button>
+        <p><span id="controlModeStatus" style="position:absolute; top:30px; left:660px; font-size: 150%">Active Mode: MANUAL</span></p> -->
+        <!-- input and output values LEFT -->
+        <!-- <p><span id="text00" style="position:absolute; top:100px; left:20px; font-size: 150%">Manual Setpoint [%]:</span></p>
+        <p><span id="text01" style="position:absolute; top:150px; left:20px; font-size: 150%">Auto Setpoint [cN]:</span></p>
+        <p><span id="text02" style="position:absolute; top:200px; left:20px; font-size: 150%">Mean Tension [cN]:</span></p>
+        <input type="number" id="InputManualSetpoint1" value="50">
+        <input type="number" id="InputAutoSetpoint1" value="15">
+        <output id="outputBTSR1"  id="volume1">50 cN</output>
+        <button id="setpointButton1">Update Setpoints Left</button> -->
+        <!-- input and output values RIGHT -->
+        <!-- <p><span id="text10" style="position:absolute; top:100px; left:520px; font-size: 150%">Manual Setpoint [%]:</span></p>
+        <p><span id="text11" style="position:absolute; top:150px; left:520px; font-size: 150%">Auto Setpoint [cN]:</span></p>
+        <p><span id="text12" style="position:absolute; top:200px; left:520px; font-size: 150%">Mean Tension [cN]:</span></p>
+        <input type="number" id="InputManualSetpoint2" value="51">
+        <input type="number" id="InputAutoSetpoint2" value="14">
+        <output id="outputBTSR2"  id="volume2">38 cN</output>        
+        <button id="setpointButton2">Update Setpoints Right</button> -->
+        <!-- <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+              <a id="dropDown1">red</a>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+            </div>
+        </div> -->
+        <select name="dropDownColors" id="dropDownColors">
+            <option value="RGB">rgb</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="pink">pink</option>
+        </select>
+        <!-- temp get array button -->
+        <!-- <button id="buttonUpdateGRB">Update</button> -->
+        <input type="number" id="InputR" value="255">
+        <input type="number" id="InputG" value="0">
+        <input type="number" id="InputB" value="0">
+        <p><span id="textR" style="position:absolute; top:100px; left:20px; font-size: 150%">R:</span></p>
+        <p><span id="textG" style="position:absolute; top:100px; left:150px; font-size: 150%">G:</span></p>
+        <p><span id="textB" style="position:absolute; top:100px; left:280px; font-size: 150%">B:</span></p>
+        <!-- <p id="iosTestText"></p> -->
+        <!-- Chart buttons -->
+        <!-- <button id="changeToSensor1button">View Sensor 1</button>
+        <button id="changeToSensor2button">View Sensor 2</button>
+        <button id="changeToSensorAllbutton">View Sensor 1 & 2</button> -->
+        <!-- Chart -->
+        <!-- <canvas id="myChart"></canvas>
+        <script type="text/javascript" src="Chart.js"></script> -->
+        <script type="text/javascript" src="index.js"></script>
+        <!-- lines -->
+        <!-- <svg style="position:absolute; top:90px; left:0px;" height="8px" width="1000px"><line x1="0px" y1="0px" x2="1000px" y2="0px" style="stroke:black;stroke-width:4" /></svg>
+        <svg style="position:absolute; top:240px; left:0px;" height="8px" width="1000px"><line x1="0px" y1="0px" x2="1000px" y2="0px" style="stroke:black;stroke-width:6" /></svg>
+        <svg style="position:absolute; top:90px; left:500px;" height="150px" width="8px"><line x1="0px" y1="0px" x2="0px" y2="150px" style="stroke:black;stroke-width:6" /></svg> -->
+    </body>
+</html>
