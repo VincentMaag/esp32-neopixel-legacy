@@ -1,0 +1,242 @@
+#body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+
+/* enable/disable ================================= */
+#buttonSingleColor{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 10px;
+  top: 10px;
+  font-size: 150%;
+  font-weight: bold;
+}
+#buttonBlinkLine{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 140px;
+  top: 10px;
+  font-size: 150%;
+  font-weight: bold;
+}
+#buttonBlend{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 270px;
+  top: 10px;
+  font-size: 150%;
+  font-weight: bold;
+}
+/* #buttonUpdateGRB{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 400px;
+  top: 10px;
+  font-size: 150%;
+  font-weight: bold;
+} */
+
+#dropDownColors{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 270px;
+  top: 150px;
+  font-size: 150%;
+  font-weight: bold;
+  text-align: center;
+}
+
+#InputR{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 55px;
+  top: 100px;
+  font-size: 150%;
+  text-align: right;
+}
+#InputG{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 185px;
+  top: 100px;
+  font-size: 150%;
+  text-align: right;
+}
+#InputB{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 315px;
+  top: 100px;
+  font-size: 150%;
+  text-align: right;
+}
+
+
+
+/* toggle control mode ============================= */
+#manualButton{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 400px;
+  top: 10px;
+  font-size: 150%;
+  font-weight: bold;
+}
+#autoButton{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 120px;
+  height: 70px;
+  left: 530px;
+  top: 10px;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+
+
+
+/* === LEFT side =================================== */
+#InputManualSetpoint1{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 270px;
+  top: 100px;
+  font-size: 150%;
+  text-align: right;
+}
+#InputAutoSetpoint1{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 270px;
+  top: 150px;
+  font-size: 150%;
+  text-align: right;
+}
+#outputBTSR1 {
+  position: absolute;
+  border-style: solid;
+  border-width: 1px;
+  margin: auto;
+  text-align: right;
+  font-size: 150%;
+  left: 270px;
+  top: 200px;
+  width: 70px;
+  font-weight: bold;
+}
+#setpointButton1{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 100px;
+  height: 130px;
+  left: 380px;
+  top: 100px;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+/* === RIGHT side =================================== */
+#InputManualSetpoint2{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 770px;
+  top: 100px;
+  font-size: 150%;
+  text-align: right;
+}
+#InputAutoSetpoint2{
+  position: absolute;
+	transition: 0.5s ease;
+  width: 70px;
+  height: 30px;
+  left: 770px;
+  top: 150px;
+  font-size: 150%;
+  text-align: right;
+}
+#outputBTSR2{
+  position: absolute;
+  border-style: solid;
+  border-width: 1px;
+  margin: auto;
+  text-align: right;
+  font-size: 150%;
+  left: 770px;
+  top: 200px;
+  width: 70px;
+  font-weight: bold;
+}
+#setpointButton2{
+	position: absolute;
+	transition: 0.5s ease;
+  width: 100px;
+  height: 130px;
+  left: 880px;
+  top: 100px;
+  font-size: 120%;
+  font-weight: bold;
+}
+/* === CHART =================================== */
+/* Chart and buttons */
+#changeToSensor1button{
+	position: absolute;
+	transition: 0.5s ease;
+    left: 1050px;
+    top: 250px;
+    height: 70px;
+    width: 100px;
+}
+#changeToSensor2button{
+	position: absolute;
+	transition: 0.5s ease;
+    left: 1050px;
+    top: 350px;
+    height: 70px;
+    width: 100px;
+}
+#changeToSensorAllbutton{
+	position: absolute;
+	transition: 0.5s ease;
+    left: 1050px;
+    top: 450px;
+    height: 70px;
+    width: 100px;
+}
+#myChart{
+	position: absolute;
+	transition: 0.5s ease;
+    left: 0px;
+    top: 250px;
+}
+
+
+
