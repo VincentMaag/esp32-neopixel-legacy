@@ -1,5 +1,5 @@
 /*
-    ...
+	...
 
 */
 #include <string.h>
@@ -66,6 +66,10 @@ static esp_err_t event_handler(void *ctx, system_event_t *event)
 		ESP_LOGI(TAG, "STA DISCONNECTED");
 		bGlobalConnectionStatus = false;
 		break;
+	case SYSTEM_EVENT_STA_GOT_IP:
+		ESP_LOGI(TAG, "SYSTEM_EVENT_STA_GOT_IP");
+		break;
+
 	default:
 		break;
 	}
@@ -86,8 +90,8 @@ void wifi_try_connect_sta()
 		ESP_ERROR_CHECK(esp_wifi_connect());
 		ESP_LOGE(TAG, "connecting... ");
 		vTaskDelay((5000 / portTICK_PERIOD_MS));
-		//vTaskDelay((5000));
-		
+		// vTaskDelay((5000));
+
 		if (bGlobalConnectionStatus)
 		{
 			ESP_LOGE(TAG, "event handler signaling successful connection");
@@ -124,7 +128,7 @@ void wifi_init()
 	ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 	// define ip adress
 	tcpip_adapter_ip_info_t IpInfo;
-	IpInfo.ip.addr = ipaddr_addr("192.168.178.100");
+	IpInfo.ip.addr = ipaddr_addr("192.168.178.39");
 	IpInfo.gw.addr = ipaddr_addr("192.168.178.1");
 	IpInfo.netmask.addr = ipaddr_addr("255.255.255.0");
 	// set ip idress
@@ -136,19 +140,32 @@ void wifi_init()
 			.password = "55940362741817360715",
 			.bssid_set = false,
 		}};
+	//sta_config.ap.authmode = WIFI_AUTH_WPA_WPA2_PSK;
 
 	// if (strlen(EXAMPLE_ESP_WIFI_PASS) == 0)
 	// {
 	// 	sta_config.ap.authmode = WIFI_AUTH_WPA_WPA2_PSK;
 	// 	}
 	// set sta mode & sta conifig
+	ESP_LOGE(TAG, "Setting Mode");
 	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+	ESP_LOGE(TAG, "Setting Config");
 	ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &sta_config));
+
+
 	// start wifi
+	ESP_LOGE(TAG, "Starting Wifi");
 	ESP_ERROR_CHECK(esp_wifi_start());
 	// connect wifi
-	//wifi_try_connect_sta();
+	// wifi_try_connect_sta();
+	// ESP_LOGE(TAG, "Disconnecting");
+	// esp_wifi_disconnect();
+	// vTaskDelay((5000 / portTICK_PERIOD_MS));
 
+
+	// ESP_LOGE(TAG, "Connecting");
+	// ESP_ERROR_CHECK(esp_wifi_connect());
+	
 }
 // =============================================================================================================
 // function to handle webserver
@@ -156,13 +173,13 @@ static void http_serve(struct netconn *conn)
 {
 	const static char *TAG2 = "http_server";
 	const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/html\n\n";
-	//const static char ERROR_HEADER[] = "HTTP/1.1 404 Not Found\nContent-type: text/html\n\n";
+	// const static char ERROR_HEADER[] = "HTTP/1.1 404 Not Found\nContent-type: text/html\n\n";
 	const static char JS_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/javascript\n\n";
 	const static char CSS_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/css\n\n";
-	//const static char PNG_HEADER[] = "HTTP/1.1 200 OK\nContent-type: image/png\n\n";
-	//const static char ICO_HEADER[] = "HTTP/1.1 200 OK\nContent-type: image/x-icon\n\n";
-	//const static char PDF_HEADER[] = "HTTP/1.1 200 OK\nContent-type: application/pdf\n\n";
-	//const static char EVENT_HEADER[] = "HTTP/1.1 200 OK\nContent-Type: text/event-stream\nCache-Control: no-cache\nretry: 3000\n\n";
+	// const static char PNG_HEADER[] = "HTTP/1.1 200 OK\nContent-type: image/png\n\n";
+	// const static char ICO_HEADER[] = "HTTP/1.1 200 OK\nContent-type: image/x-icon\n\n";
+	// const static char PDF_HEADER[] = "HTTP/1.1 200 OK\nContent-type: application/pdf\n\n";
+	// const static char EVENT_HEADER[] = "HTTP/1.1 200 OK\nContent-Type: text/event-stream\nCache-Control: no-cache\nretry: 3000\n\n";
 	struct netbuf *inbuf;
 	static char *buf;
 	static uint16_t buflen;
@@ -210,12 +227,12 @@ static void http_serve(struct netconn *conn)
 				netbuf_delete(inbuf);
 			}
 			// default page websocket
-			else if (strstr(buf, "GET / ") && strstr(buf, "Upgrade: websocket"))
-			{
-				ESP_LOGI(TAG2, "Requesting websocket on /");
-				ws_server_add_client(conn, buf, buflen, "/", websocket_callback);
-				netbuf_delete(inbuf);
-			}
+			// else if (strstr(buf, "GET / ") && strstr(buf, "Upgrade: websocket"))
+			// {
+			// 	ESP_LOGI(TAG2, "Requesting websocket on /");
+			// 	ws_server_add_client(conn, buf, buflen, "/", websocket_callback);
+			// 	netbuf_delete(inbuf);
+			// }
 			//
 			else if (strstr(buf, "GET /index.js "))
 			{
@@ -291,14 +308,14 @@ static void http_serve(struct netconn *conn)
 			// adc 0
 			else if (strstr(buf, "GET /getData"))
 			{
-				//ESP_LOGE(TAG2,"Requesting value of btsr sensors \n");
-				// create ints out of floats to send single bytes (1 byte <= 255 float value)
+				// ESP_LOGE(TAG2,"Requesting value of btsr sensors \n");
+				//  create ints out of floats to send single bytes (1 byte <= 255 float value)
 
 				// sent data = [1b control mode] + [2b mean value 1] + [2b mean value 2] + [2b %-setpoint1] + [2b %-setpoint2]
 
 				// control mode of drive 1 (i.e. both drives)
-				//int idata00 = 0;
-				//if((xEventGroupGetBits(hdrive_event_group_array[0]) & BIT_CONTROL_MODE_MANUAL) == BIT_CONTROL_MODE_MANUAL){
+				// int idata00 = 0;
+				// if((xEventGroupGetBits(hdrive_event_group_array[0]) & BIT_CONTROL_MODE_MANUAL) == BIT_CONTROL_MODE_MANUAL){
 				//	idata00 = 0;
 				//}else if((xEventGroupGetBits(hdrive_event_group_array[0]) & BIT_CONTROL_MODE_MEAN) == BIT_CONTROL_MODE_MEAN){
 				//	idata00 = 1;
@@ -306,7 +323,7 @@ static void http_serve(struct netconn *conn)
 
 				uint8_t idata00 = current_control_mode[0];
 
-				//ESP_LOGE(TAG2,"bit0 sent: %i\n",idata00);
+				// ESP_LOGE(TAG2,"bit0 sent: %i\n",idata00);
 				//
 				int idata0 = (int)(100 * mean_control[0].display_mean);
 				int idata1 = (int)(100 * mean_control[1].display_mean);
@@ -354,7 +371,7 @@ static void http_serve(struct netconn *conn)
 			// adc 0
 			else if (strstr(buf, "GET /getArray"))
 			{
-				//ESP_LOGE(TAG2,"Requesting array \n");
+				// ESP_LOGE(TAG2,"Requesting array \n");
 				int i;
 				int idata;
 				int idata2;
@@ -397,8 +414,8 @@ static void http_serve(struct netconn *conn)
 				int extractedData2 = ((buf[length + 2] - '0') * 10 + (buf[length + 3] - '0'));
 				// Log
 				ESP_LOGE(TAG2, "Requesting repositioning of hdrive 0: %i\n", extractedData);
-				//printf("String: %s\nlength: %i\nbuf: %c\nbufExtract: %i\n",buf,length,buf[length-1],test);
-				//printf("%s\n",buf);
+				// printf("String: %s\nlength: %i\nbuf: %c\nbufExtract: %i\n",buf,length,buf[length-1],test);
+				// printf("%s\n",buf);
 				printf("first number: %i second number: %i\n", extractedData, extractedData2);
 				//
 				// copy setoint and signal event
@@ -430,9 +447,9 @@ static void http_serve(struct netconn *conn)
 				int extractedData2 = ((buf[length + 2] - '0') * 10 + (buf[length + 3] - '0'));
 				// Log
 				ESP_LOGE(TAG2, "Requesting repositioning of hdrive 1: %i\n", extractedData);
-				//printf("String: %s\nlength: %i\nbuf: %c\nbufExtract: %i\n",buf,length,buf[length-1],test);
+				// printf("String: %s\nlength: %i\nbuf: %c\nbufExtract: %i\n",buf,length,buf[length-1],test);
 				//
-				// copy setoint and signal event
+				//  copy setoint and signal event
 				wifi_fb[1].setpoint_hdrive = (float)extractedData;
 				wifi_fb[1].setpoint_mean_control = (float)extractedData2;
 				xEventGroupSetBits(hdrive_event_group_array[1], BIT_CHANGE_SETPOINT_HDRIVE);
@@ -491,9 +508,9 @@ static void http_serve(struct netconn *conn)
 				int idata2;
 
 				// testdata
-				//int test_idx = 254;
-				//float test_array[254];
-				//for(i=0;i<test_idx;i++){
+				// int test_idx = 254;
+				// float test_array[254];
+				// for(i=0;i<test_idx;i++){
 				//	test_array[i] = i;
 				//}
 
@@ -513,17 +530,17 @@ static void http_serve(struct netconn *conn)
 				}
 
 				// fill buffer with Sensor 2 data
-				//for(i=dataAcq[0].idx;i<(2*dataAcq[0].idx);i++){
+				// for(i=dataAcq[0].idx;i<(2*dataAcq[0].idx);i++){
 				//	idata = (int)dataAcq[0].valid_data[i];
 				//	outbuf[i] = ((char*)&idata)[0];
 				//}
 
 				char outbuf_ios[1000];
 				outbuf_ios[0] = "0";
-				//outbuf_ios[1] = "0";
+				// outbuf_ios[1] = "0";
 
 				netconn_write(conn, outbuf_ios, sizeof(outbuf_ios), NETCONN_NOCOPY);
-				//netconn_write(conn, outbuf, 4, NETCONN_NOCOPY);
+				// netconn_write(conn, outbuf, 4, NETCONN_NOCOPY);
 
 				//
 				netconn_close(conn);
@@ -669,12 +686,12 @@ static void server_task(void *pvParameters)
 	do
 	{
 		err = netconn_accept(conn, &newconn);
-		//ESP_LOGI(TAG2,"new client");
+		// ESP_LOGI(TAG2,"new client");
 		if (err == ERR_OK)
 		{
-			//ESP_LOGI(TAG2, "newconn->socket: %d", newconn->socket);
+			// ESP_LOGI(TAG2, "newconn->socket: %d", newconn->socket);
 			xQueueSendToBack(client_queue, &newconn, portMAX_DELAY);
-			//http_serve(newconn);
+			// http_serve(newconn);
 		}
 		vTaskDelay(pdMS_TO_TICKS(1));
 	} while (err == ERR_OK);
@@ -699,64 +716,64 @@ static void server_handle_task(void *pvParameters)
 	vTaskDelete(NULL);
 }
 // handles websocket events
-void websocket_callback(uint8_t num, WEBSOCKET_TYPE_t type, char *msg, uint64_t len)
-{
-	const static char *TAG2 = "websocket_callback";
-	//	int value;
+// void websocket_callback(uint8_t num, WEBSOCKET_TYPE_t type, char *msg, uint64_t len)
+// {
+// 	const static char *TAG2 = "websocket_callback";
+// 	//	int value;
 
-	switch (type)
-	{
-	case WEBSOCKET_CONNECT:
-		ESP_LOGI(TAG2, "client %i connected!", num);
-		break;
-	case WEBSOCKET_DISCONNECT_EXTERNAL:
-		ESP_LOGI(TAG2, "client %i sent a disconnect message", num);
-		//		led_duty(0);
-		break;
-	case WEBSOCKET_DISCONNECT_INTERNAL:
-		ESP_LOGI(TAG2, "client %i was disconnected", num);
-		break;
-	case WEBSOCKET_DISCONNECT_ERROR:
-		ESP_LOGI(TAG2, "client %i was disconnected due to an error", num);
-		//		led_duty(0);
-		break;
-	case WEBSOCKET_TEXT:
-		//		if(len) {
-		//			switch(msg[0]) {
-		//			case 'L':
-		//				if(sscanf(msg,"L%i",&value)) {
-		//					ESP_LOGI(TAG2,"LED value: %i",value);
-		//					led_duty(value);
-		//					ws_server_send_text_all_from_callback(msg,len); // broadcast it!
-		//				}
-		//			}
-		//		}
-		break;
-	case WEBSOCKET_BIN:
-		ESP_LOGI(TAG2, "client %i sent binary message of size %i:\n%s", num, (uint32_t)len, msg);
-		break;
-	case WEBSOCKET_PING:
-		ESP_LOGI(TAG2, "client %i pinged us with message of size %i:\n%s", num, (uint32_t)len, msg);
-		break;
-	case WEBSOCKET_PONG:
-		ESP_LOGI(TAG2, "client %i responded to the ping", num);
-		break;
-	}
-}
+// 	switch (type)
+// 	{
+// 	case WEBSOCKET_CONNECT:
+// 		ESP_LOGI(TAG2, "client %i connected!", num);
+// 		break;
+// 	case WEBSOCKET_DISCONNECT_EXTERNAL:
+// 		ESP_LOGI(TAG2, "client %i sent a disconnect message", num);
+// 		//		led_duty(0);
+// 		break;
+// 	case WEBSOCKET_DISCONNECT_INTERNAL:
+// 		ESP_LOGI(TAG2, "client %i was disconnected", num);
+// 		break;
+// 	case WEBSOCKET_DISCONNECT_ERROR:
+// 		ESP_LOGI(TAG2, "client %i was disconnected due to an error", num);
+// 		//		led_duty(0);
+// 		break;
+// 	case WEBSOCKET_TEXT:
+// 		//		if(len) {
+// 		//			switch(msg[0]) {
+// 		//			case 'L':
+// 		//				if(sscanf(msg,"L%i",&value)) {
+// 		//					ESP_LOGI(TAG2,"LED value: %i",value);
+// 		//					led_duty(value);
+// 		//					ws_server_send_text_all_from_callback(msg,len); // broadcast it!
+// 		//				}
+// 		//			}
+// 		//		}
+// 		break;
+// 	case WEBSOCKET_BIN:
+// 		ESP_LOGI(TAG2, "client %i sent binary message of size %i:\n%s", num, (uint32_t)len, msg);
+// 		break;
+// 	case WEBSOCKET_PING:
+// 		ESP_LOGI(TAG2, "client %i pinged us with message of size %i:\n%s", num, (uint32_t)len, msg);
+// 		break;
+// 	case WEBSOCKET_PONG:
+// 		ESP_LOGI(TAG2, "client %i responded to the ping", num);
+// 		break;
+// 	}
+// }
 // =====================================================================
 void wifi_task(void *arg)
 {
 	// start wifi
 	wifi_init();
 	// start webserver
-	ws_server_stop();
-	ws_server_start();
+	//ws_server_stop();
+	//ws_server_start();
 	// create needed tasks
 	xTaskCreatePinnedToCore(&server_task, "server_task", 3000, NULL, 5, NULL, 0);
 	xTaskCreatePinnedToCore(&server_handle_task, "server_handle_task", 4000, NULL, 5, NULL, 0);
 	// inf loop
 	while (1)
-		{
+	{
 		// check if wifi disconnected:
 		if (bGlobalConnectionStatus == false)
 		{
@@ -764,11 +781,9 @@ void wifi_task(void *arg)
 			wifi_try_connect_sta();
 		}
 
-		
-		//ESP_LOGE(TAG, "=== 1s? ===");
+		// ESP_LOGE(TAG, "Heratbeat");
 		//..
-		vTaskDelay((1000 / portTICK_PERIOD_MS));
-		//vTaskDelay(10000);
-		
+		vTaskDelay((10000 / portTICK_PERIOD_MS));
+		// vTaskDelay(10000);
 	}
 }
