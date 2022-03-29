@@ -764,26 +764,31 @@ static void server_handle_task(void *pvParameters)
 void wifi_task(void *arg)
 {
 	// start wifi
+	
 	wifi_init();
+	
 	// start webserver
 	//ws_server_stop();
 	//ws_server_start();
 	// create needed tasks
+
 	xTaskCreatePinnedToCore(&server_task, "server_task", 3000, NULL, 5, NULL, 0);
 	xTaskCreatePinnedToCore(&server_handle_task, "server_handle_task", 4000, NULL, 5, NULL, 0);
+	
 	// inf loop
 	while (1)
 	{
 		// check if wifi disconnected:
+		
 		if (bGlobalConnectionStatus == false)
 		{
 			ESP_LOGE(TAG, "caught disconnection after successful connection");
 			wifi_try_connect_sta();
 		}
 
-		// ESP_LOGE(TAG, "Heratbeat");
+		ESP_LOGE(TAG, "Heratbeat 1s?");
 		//..
 		vTaskDelay((10000 / portTICK_PERIOD_MS));
-		// vTaskDelay(10000);
+		//vTaskDelay(10000);
 	}
 }

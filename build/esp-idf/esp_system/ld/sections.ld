@@ -197,7 +197,7 @@ SECTIONS
     *libesp_system.a:esp_system.*(.literal.esp_system_abort .text.esp_system_abort)
     *libesp_system.a:ubsan.*(.literal .literal.* .text .text.*)
     *libfreertos.a:(EXCLUDE_FILE(*libfreertos.a:port.* *libfreertos.a:port_common.*) .literal EXCLUDE_FILE(*libfreertos.a:port.* *libfreertos.a:port_common.*) .literal.* EXCLUDE_FILE(*libfreertos.a:port.* *libfreertos.a:port_common.*) .text EXCLUDE_FILE(*libfreertos.a:port.* *libfreertos.a:port_common.*) .text.*)
-    *libfreertos.a:port.*(.literal.pxPortInitialiseStack .literal.vApplicationStackOverflowHook .literal.vPortAssertIfInISR .literal.vPortEndScheduler .literal.vPortExitCritical .literal.vPortExitCriticalCompliance .literal.vPortReleaseTaskMPUSettings .literal.vPortSetStackWatchpoint .literal.vPortTaskWrapper .literal.vPortYieldOtherCore .literal.xPortEnterCriticalTimeout .literal.xPortEnterCriticalTimeoutCompliance .literal.xPortInIsrContext .literal.xPortStartScheduler .text .text.pxPortInitialiseStack .text.vApplicationStackOverflowHook .text.vPortAssertIfInISR .text.vPortEndScheduler .text.vPortExitCritical .text.vPortExitCriticalCompliance .text.vPortReleaseTaskMPUSettings .text.vPortSetStackWatchpoint .text.vPortStoreTaskMPUSettings .text.vPortTaskWrapper .text.vPortYieldOtherCore .text.xPortEnterCriticalTimeout .text.xPortEnterCriticalTimeoutCompliance .text.xPortGetTickRateHz .text.xPortInIsrContext .text.xPortStartScheduler)
+    *libfreertos.a:port.*(.literal.pxPortInitialiseStack .literal.vApplicationStackOverflowHook .literal.vPortAssertIfInISR .literal.vPortEndScheduler .literal.vPortExitCritical .literal.vPortExitCriticalCompliance .literal.vPortReleaseTaskMPUSettings .literal.vPortSetStackWatchpoint .literal.vPortTaskWrapper .literal.vPortYieldOtherCore .literal.xPortEnterCriticalTimeout .literal.xPortEnterCriticalTimeoutCompliance .literal.xPortGetTickRateHz .literal.xPortInIsrContext .literal.xPortStartScheduler .text .text.pxPortInitialiseStack .text.vApplicationStackOverflowHook .text.vPortAssertIfInISR .text.vPortEndScheduler .text.vPortExitCritical .text.vPortExitCriticalCompliance .text.vPortReleaseTaskMPUSettings .text.vPortSetStackWatchpoint .text.vPortStoreTaskMPUSettings .text.vPortTaskWrapper .text.vPortYieldOtherCore .text.xPortEnterCriticalTimeout .text.xPortEnterCriticalTimeoutCompliance .text.xPortGetTickRateHz .text.xPortInIsrContext .text.xPortStartScheduler)
     *libfreertos.a:port_common.*(.literal.esp_startup_start_app_common .literal.vApplicationGetIdleTaskMemory .literal.vApplicationGetTimerTaskMemory .literal.xPortCheckValidTCBMem .literal.xPortcheckValidStackMem .text .text.esp_startup_start_app_common .text.vApplicationGetIdleTaskMemory .text.vApplicationGetTimerTaskMemory .text.xPortCheckValidTCBMem .text.xPortcheckValidStackMem)
     *libgcc.a:lib2funcs.*(.literal .literal.* .text .text.*)
     *libgcov.a:(.literal .literal.* .text .text.*)
@@ -356,8 +356,8 @@ SECTIONS
     _bss_start = ABSOLUTE(.);
 
     *(.bss .bss.*)
-    *(.ext_ram.bss .ext_ram.bss.*)
     *(.dynbss .dynsbss .gnu.linkonce.b .gnu.linkonce.b.* .gnu.linkonce.sb .gnu.linkonce.sb.* .gnu.linkonce.sb2 .gnu.linkonce.sb2.* .sbss .sbss.* .sbss2 .sbss2.* .scommon .share.mem)
+    *(.ext_ram.bss .ext_ram.bss.*)
     *(COMMON)
     _bt_bss_start = ABSOLUTE(.);
     *libbt.a:(.bss .bss.* COMMON)
