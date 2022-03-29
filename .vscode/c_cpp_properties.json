@@ -1,8 +1,8 @@
 {
     "configurations": [
         {
-            // === PC IDF 4.4 ========================================================================
-            "name": "Win32_PC_4_4",
+            // === PC IDF ========================================================================
+            "name": "Win32_PC",
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/build/config/**",
@@ -19,8 +19,8 @@
             "compilerPath": "c:\\.espressif\\tools\\xtensa-esp32-elf\\esp-2019r2-8.2.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe"
         },
         {
-            // === PC IDF 4.0.1 ========================================================================
-            "name": "Win32_PC_4_0",
+            // === SURFACE IDF ========================================================================
+            "name": "Win32_SURFACE",
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/build/config/**",
