@@ -505,10 +505,3 @@ C:/esp32/GitHub/esp32-neopixel/build/esp-idf/main/CMakeFiles/__idf_main.dir
 C:/esp32/GitHub/esp32-neopixel/build/esp-idf/main/CMakeFiles/rebuild_cache.dir
 C:/esp32/GitHub/esp32-neopixel/build/esp-idf/main/CMakeFiles/list_install_components.dir
 C:/esp32/GitHub/esp32-neopixel/build/esp-idf/main/CMakeFiles/install/strip.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/install/local.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/install.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/edit_cache.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/__idf_websocket.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/rebuild_cache.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/list_install_components.dir
-C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/CMakeFiles/install/strip.dir
