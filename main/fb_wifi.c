@@ -17,6 +17,7 @@
 
 #include "lwip/err.h"
 #include "lwip/sys.h"
+#include "lwip/api.h"
 
 #include "fb_wifi.h"
 #include "fb_projdefs.h"
