@@ -1,0 +1,49 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+
+		"terminal.integrated.profiles.windows": {
+			"Command Prompt esp32": {
+				"path": [
+					"${env:windir}\\Sysnative\\cmd.exe",
+					"${env:windir}\\System32\\cmd.exe"
+				],
+				"args": ["/k", "C:/esp_idf/Github/esp-idf_4_0/export.bat"],
+				"icon": "terminal-cmd"
+			},
+		},
+		
+		"files.associations": {
+			"ledc.h": "c",
+			"websocket_server.h": "c",
+			"websocket.h": "c",
+			"http_parser.h": "c",
+			"nvs_flash.h": "c",
+			"event_groups.h": "c",
+			"freertos.h": "c",
+			"freertosconfig.h": "c",
+			"random": "c",
+			"timer.h": "c",
+			"fb_mean_control.h": "c",
+			"fb_projdefs.h": "c",
+			"stdlib.h": "c",
+			"esp_wifi.h": "c",
+			"tcpip_adapter.h": "c",
+			"sdkconfig.h": "c",
+			"ip4_addr.h": "c",
+			"esp_event_loop.h": "c",
+			"chrono": "c",
+			"limits": "c",
+			"array": "c",
+			"string": "c",
+			"string_view": "c",
+			"string.h": "c",
+			"*.ipp": "c",
+			"*.tcc": "cpp"
+		}
+	}
+}
