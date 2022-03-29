@@ -99,7 +99,6 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/esp32/GitHub/esp32-neopixel/build/esp-idf/unity/cmake_install.cmake")
   include("C:/esp32/GitHub/esp32-neopixel/build/esp-idf/wifi_provisioning/cmake_install.cmake")
   include("C:/esp32/GitHub/esp32-neopixel/build/esp-idf/main/cmake_install.cmake")
-  include("C:/esp32/GitHub/esp32-neopixel/build/esp-idf/websocket/cmake_install.cmake")
 
 endif()
 
