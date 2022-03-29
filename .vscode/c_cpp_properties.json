@@ -1,10 +1,12 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            // === PC IDF 4.4 ========================================================================
+            "name": "Win32_PC_4_4",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/esp_idf/Github/esp-idf_4_0/**"
+                "${workspaceFolder}/build/config/**",
+                "C:/esp-idf/esp-idf-v4.4/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -13,8 +15,26 @@
             ],
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x86",
-            "compilerPath": "c:\\esp_idf\\.espressif\\tools\\xtensa-esp32-elf\\esp-2019r2-8.2.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath": "c:\\.espressif\\tools\\xtensa-esp32-elf\\esp-2019r2-8.2.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe"
+        },
+        {
+            // === PC IDF 4.0.1 ========================================================================
+            "name": "Win32_PC_4_0",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/build/config/**",
+                "C:/esp-idf/esp-idf_4_0/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath": "c:\\.espressif\\tools\\xtensa-esp32-elf\\esp-2019r2-8.2.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe"
         }
     ],
     "version": 4

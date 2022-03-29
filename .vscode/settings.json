@@ -1,3 +1,14 @@
 {
-    "idf.adapterTargetName": "esp32"
+    // "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    // "terminal.integrated.profiles.windows": {
+    //     "Command Prompt esp32": {
+    //         "path": [
+    //             "${env:windir}\\Sysnative\\cmd.exe",
+    //             "${env:windir}\\System32\\cmd.exe"
+    //         ],
+    //         "args": ["/k", "C:/.espressif/idf_cmd_init.bat esp-idf-772cbd6880ad64d340ce40cb89839dc9"],
+    //         "icon": "terminal-cmd"
+    //     },
+    // },
 }
+
