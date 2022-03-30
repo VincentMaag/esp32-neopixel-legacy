@@ -7,12 +7,23 @@
 	"settings": {
 
 		"terminal.integrated.profiles.windows": {
-			"Command Prompt esp32": {
+
+			// === PC ========================================================================
+			"esp32 PC": {
 				"path": [
 					"${env:windir}\\Sysnative\\cmd.exe",
 					"${env:windir}\\System32\\cmd.exe"
 				],
-				"args": ["/k", "C:/esp32_idf/esp-idf_4_0/export.bat"],
+				"args": ["/k", "C:/.espressif/idf_cmd_init.bat esp-idf-772cbd6880ad64d340ce40cb89839dc9"],
+				"icon": "terminal-cmd"
+			},
+			// === SURFACE ========================================================================
+			"esp32 SurfaceBook": {
+				"path": [
+					"${env:windir}\\Sysnative\\cmd.exe",
+					"${env:windir}\\System32\\cmd.exe"
+				],
+				"args": ["/k", "C:/.espressif/idf_cmd_init.bat"],
 				"icon": "terminal-cmd"
 			},
 		},
@@ -43,7 +54,9 @@
 			"string_view": "c",
 			"string.h": "c",
 			"*.ipp": "c",
-			"*.tcc": "cpp"
+			"*.tcc": "cpp",
+			"err.h": "c",
+			"task.h": "c"
 		}
 	}
 }

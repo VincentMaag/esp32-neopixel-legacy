@@ -3,8 +3,8 @@
 cmake_minimum_required(VERSION 3.5)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(wifi_softAP)
-target_add_binary_data(wifi_softAP.elf "main/index/index.html" BINARY)
-target_add_binary_data(wifi_softAP.elf "main/index/index.js" BINARY)
-target_add_binary_data(wifi_softAP.elf "main/index/index.css" BINARY)
-target_add_binary_data(wifi_softAP.elf "main/index/Chart.js" BINARY)
+project(neopixel)
+target_add_binary_data(neopixel.elf "main/index/index.html" BINARY)
+target_add_binary_data(neopixel.elf "main/index/index.js" BINARY)
+target_add_binary_data(neopixel.elf "main/index/index.css" BINARY)
+target_add_binary_data(neopixel.elf "main/index/Chart.js" BINARY)

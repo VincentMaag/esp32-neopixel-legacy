@@ -172,7 +172,10 @@ void wifi_init()
 static void http_serve(struct netconn *conn)
 {
 	const static char *TAG2 = "http_server";
-	const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/html\n\n";
+	// const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/html\n\n";
+
+	const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nAccess-Control-Allow-Origin: *\nContent-type: text/html\n\n";
+
 	// const static char ERROR_HEADER[] = "HTTP/1.1 404 Not Found\nContent-type: text/html\n\n";
 	const static char JS_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/javascript\n\n";
 	const static char CSS_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/css\n\n";
@@ -215,25 +218,18 @@ static void http_serve(struct netconn *conn)
 		netbuf_data(inbuf, (void **)&buf, &buflen);
 		if (buf)
 		{
-
+			// print the whole request for debugging purposes
+			printf("\n\n%s\n",buf);
 			// default page
 			if (strstr(buf, "GET / ") && !strstr(buf, "Upgrade: websocket"))
 			{
-				ESP_LOGI(TAG2, "Sending /");
+				ESP_LOGI(TAG2, "Sending /index.html");
 				netconn_write(conn, HTML_HEADER, sizeof(HTML_HEADER) - 1, NETCONN_NOCOPY);
 				netconn_write(conn, root_html_start, root_html_len, NETCONN_NOCOPY);
 				netconn_close(conn);
 				netconn_delete(conn);
 				netbuf_delete(inbuf);
 			}
-			// default page websocket
-			// else if (strstr(buf, "GET / ") && strstr(buf, "Upgrade: websocket"))
-			// {
-			// 	ESP_LOGI(TAG2, "Requesting websocket on /");
-			// 	ws_server_add_client(conn, buf, buflen, "/", websocket_callback);
-			// 	netbuf_delete(inbuf);
-			// }
-			//
 			else if (strstr(buf, "GET /index.js "))
 			{
 				ESP_LOGI(TAG2, "Sending /index.js");
@@ -258,6 +254,14 @@ static void http_serve(struct netconn *conn)
 				ESP_LOGI(TAG2, "Sending /index.css");
 				netconn_write(conn, CSS_HEADER, sizeof(CSS_HEADER) - 1, NETCONN_NOCOPY);
 				netconn_write(conn, index_css_start, index_css_len, NETCONN_NOCOPY);
+				netconn_close(conn);
+				netconn_delete(conn);
+				netbuf_delete(inbuf);
+			}
+			else if (strstr(buf, "GET /favicon.ico "))
+			{
+				ESP_LOGI(TAG2, "Requested favicon, however none to send yet");
+				netconn_write(conn, CSS_HEADER, sizeof(CSS_HEADER) - 1, NETCONN_NOCOPY);
 				netconn_close(conn);
 				netconn_delete(conn);
 				netbuf_delete(inbuf);
@@ -764,26 +768,31 @@ static void server_handle_task(void *pvParameters)
 void wifi_task(void *arg)
 {
 	// start wifi
+	
 	wifi_init();
+	
 	// start webserver
 	//ws_server_stop();
-	//ws_server_start();
+	//ws_server_start();]
 	// create needed tasks
+
 	xTaskCreatePinnedToCore(&server_task, "server_task", 3000, NULL, 5, NULL, 0);
 	xTaskCreatePinnedToCore(&server_handle_task, "server_handle_task", 4000, NULL, 5, NULL, 0);
+	
 	// inf loop
 	while (1)
 	{
 		// check if wifi disconnected:
+		
 		if (bGlobalConnectionStatus == false)
 		{
-			ESP_LOGE(TAG, "caught disconnection after successful connection");
+			ESP_LOGE(TAG, "]caught disconnection after successful connection");
 			wifi_try_connect_sta();
 		}
 
-		// ESP_LOGE(TAG, "Heratbeat");
+		//ESP_LOGE(TAG, "Heratbeat 1s?");
 		//..
-		vTaskDelay((10000 / portTICK_PERIOD_MS));
-		// vTaskDelay(10000);
+		vTaskDelay((1000 / portTICK_PERIOD_MS));
+		//vTaskDelay(10000);
 	}
 }
