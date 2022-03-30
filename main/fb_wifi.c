@@ -172,7 +172,10 @@ void wifi_init()
 static void http_serve(struct netconn *conn)
 {
 	const static char *TAG2 = "http_server";
-	const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/html\n\n";
+	// const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/html\n\n";
+
+	const static char HTML_HEADER[] = "HTTP/1.1 200 OK\nAccess-Control-Allow-Origin: *\nContent-type: text/html\n\n";
+
 	// const static char ERROR_HEADER[] = "HTTP/1.1 404 Not Found\nContent-type: text/html\n\n";
 	const static char JS_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/javascript\n\n";
 	const static char CSS_HEADER[] = "HTTP/1.1 200 OK\nContent-type: text/css\n\n";
@@ -215,11 +218,8 @@ static void http_serve(struct netconn *conn)
 		netbuf_data(inbuf, (void **)&buf, &buflen);
 		if (buf)
 		{
-
-			
+			// print the whole request for debugging purposes
 			printf("\n\n%s\n",buf);
-
-
 			// default page
 			if (strstr(buf, "GET / ") && !strstr(buf, "Upgrade: websocket"))
 			{
@@ -262,7 +262,6 @@ static void http_serve(struct netconn *conn)
 			{
 				ESP_LOGI(TAG2, "Requested favicon, however none to send yet");
 				netconn_write(conn, CSS_HEADER, sizeof(CSS_HEADER) - 1, NETCONN_NOCOPY);
-				//netconn_write(conn, index_css_start, index_css_len, NETCONN_NOCOPY);
 				netconn_close(conn);
 				netconn_delete(conn);
 				netbuf_delete(inbuf);
