@@ -8,7 +8,7 @@ C:/esp-proj/esp32-neopixel/build/CMakeFiles/flash.dir
 C:/esp-proj/esp32-neopixel/build/CMakeFiles/monitor.dir
 C:/esp-proj/esp32-neopixel/build/CMakeFiles/encrypted-flash.dir
 C:/esp-proj/esp32-neopixel/build/CMakeFiles/_project_elf_src.dir
-C:/esp-proj/esp32-neopixel/build/CMakeFiles/wifi_softAP.elf.dir
+C:/esp-proj/esp32-neopixel/build/CMakeFiles/neopixel.elf.dir
 C:/esp-proj/esp32-neopixel/build/CMakeFiles/size.dir
 C:/esp-proj/esp32-neopixel/build/CMakeFiles/size-files.dir
 C:/esp-proj/esp32-neopixel/build/CMakeFiles/size-components.dir
