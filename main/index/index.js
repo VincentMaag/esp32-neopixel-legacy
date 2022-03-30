@@ -740,11 +740,11 @@ function toggleBlinkerESP2(){
     };
     var postCommandString = "http://192.168.178.38";
     // toggle status
-    if (blinkerStatus1 == false){
-        blinkerStatus1 = true;
+    if (blinkerStatus2 == false){
+        blinkerStatus2 = true;
         postCommandString = postCommandString + "/LEDSTART"
     }else{
-        blinkerStatus1 = false;
+        blinkerStatus2 = false;
         postCommandString = postCommandString + "/LEDSTOP"
     }
     //
