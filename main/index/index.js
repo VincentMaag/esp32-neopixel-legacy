@@ -138,7 +138,8 @@ function init(){
     document.getElementById("InputG").addEventListener("click", function(){dropDown.selectedIndex=0});
     document.getElementById("InputB").addEventListener("click", function(){dropDown.selectedIndex=0});
 
-    
+    document.getElementById("buttonESP1").addEventListener("click", toggleBlinkerESP1);
+    document.getElementById("buttonESP2").addEventListener("click", toggleBlinkerESP2);
 
     //document.getElementById("dropDownColors").addEventListener("onchange", sendGRB);
 
@@ -703,8 +704,54 @@ function changeToBlend(){
     xhttp.responseType = "arraybuffer";
     xhttp.send();
 }
-
-
+// =========================================================================================
+var blinkerStatus1 = true;
+function toggleBlinkerESP1(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // do nothing with response
+            ;
+        }
+    };
+    var postCommandString = "http://192.168.178.39";
+    // toggle status
+    if (blinkerStatus1 == false){
+        blinkerStatus1 = true;
+        postCommandString = postCommandString + "/LEDSTART"
+    }else{
+        blinkerStatus1 = false;
+        postCommandString = postCommandString + "/LEDSTOP"
+    }
+    //
+    xhttp.open("POST", postCommandString, true);
+    xhttp.responseType = "arraybuffer";
+    xhttp.send();
+}
+// =========================================================================================
+var blinkerStatus2 = true;
+function toggleBlinkerESP2(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // do nothing with response
+            ;
+        }
+    };
+    var postCommandString = "http://192.168.178.38";
+    // toggle status
+    if (blinkerStatus1 == false){
+        blinkerStatus1 = true;
+        postCommandString = postCommandString + "/LEDSTART"
+    }else{
+        blinkerStatus1 = false;
+        postCommandString = postCommandString + "/LEDSTOP"
+    }
+    //
+    xhttp.open("POST", postCommandString, true);
+    xhttp.responseType = "arraybuffer";
+    xhttp.send();
+}
 
 
 // =========================================================================================

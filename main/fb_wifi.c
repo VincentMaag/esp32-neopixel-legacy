@@ -21,6 +21,7 @@
 
 #include "fb_wifi.h"
 #include "fb_projdefs.h"
+#include "fb_blinker.h"
 
 //#include "index.h"
 #include "http_parser.h"
@@ -219,7 +220,7 @@ static void http_serve(struct netconn *conn)
 		if (buf)
 		{
 			// print the whole request for debugging purposes
-			printf("\n\n%s\n",buf);
+			// printf("\n\n%s\n",buf);
 			// default page
 			if (strstr(buf, "GET / ") && !strstr(buf, "Upgrade: websocket"))
 			{
@@ -648,6 +649,37 @@ static void http_serve(struct netconn *conn)
 				netbuf_delete(inbuf);
 
 				// err_t   netconn_recv(struct netconn *conn, struct netbuf **new_buf);
+			}
+			// =========================================================================
+			// Start/Stop LED blinking
+			else if (strstr(buf, "POST /LEDSTART"))
+			{
+				ESP_LOGE(TAG2, "Requesting to Start LED-blinking\n");
+				//
+				blinker_set_mode(BLINKER_FAST);
+				blinker_start();
+				//
+				// respond with header
+				netconn_write(conn, HTML_HEADER, sizeof(HTML_HEADER) - 1, NETCONN_NOCOPY);
+				//
+				netconn_close(conn);
+				netconn_delete(conn);
+				netbuf_delete(inbuf);
+			}
+			// =========================================================================
+			// Start/Stop LED blinking
+			else if (strstr(buf, "POST /LEDSTOP"))
+			{
+				ESP_LOGE(TAG2, "Requesting to Stop LED-blinking\n");
+				//
+				blinker_stop();
+				//
+				// respond with header
+				netconn_write(conn, HTML_HEADER, sizeof(HTML_HEADER) - 1, NETCONN_NOCOPY);
+				//
+				netconn_close(conn);
+				netconn_delete(conn);
+				netbuf_delete(inbuf);
 			}
 			//
 			else

@@ -28,6 +28,7 @@
 #include "fb_data_acq.h"
 #include "fb_mean_control.h"
 #include "fb_nvs.h"
+#include "fb_blinker.h"
 
 #include "neopixel.h"
 
@@ -39,6 +40,8 @@ TaskHandle_t mean_control_task_handle = NULL;
 TaskHandle_t nvs_task_handle = NULL;
 TaskHandle_t neopixel_task_handle = NULL;
 TaskHandle_t wifi_task_handle = NULL;
+TaskHandle_t blinker_task_handle = NULL;
+
 
 
 void app_main()
@@ -149,6 +152,8 @@ void app_main()
     //xTaskCreatePinnedToCore(nvs_task, "nvs_task", 2048, (void *) 0, 1, &nvs_task_handle, 1);
 
     xTaskCreatePinnedToCore(neopixel_task, "neopixel_task", 4096, (void *) 0, 1, &neopixel_task_handle, 1); //--> add .c components in CMakeList!
+
+    xTaskCreatePinnedToCore(blinker_task, "blinker_task", 2048, (void *) 0, 1, &blinker_task_handle, 1); //--> add .c components in CMakeList!
 
 
     // try and write to flash, once
