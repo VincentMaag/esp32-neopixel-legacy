@@ -24,7 +24,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/build/config/**",
-                "C:/esp-idf/esp-idf_4_0/**"
+                "C:/esp32_idf/esp-idf_4_0/**"
             ],
             "defines": [
                 "_DEBUG",

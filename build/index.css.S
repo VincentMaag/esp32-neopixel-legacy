@@ -1,4 +1,4 @@
-/* * Data converted from C:/esp-proj/esp32-neopixel/main/index/index.css
+/* * Data converted from C:/esp32/GitHub/esp32-neopixel/main/index/index.css
  */
 .data
 .section .rodata.embedded

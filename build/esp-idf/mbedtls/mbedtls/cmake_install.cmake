@@ -1,4 +1,4 @@
-# Install script for directory: C:/esp-idf/esp-idf-v4.4/components/mbedtls/mbedtls
+# Install script for directory: C:/esp32_idf/esp-idf_4_0/components/mbedtls/mbedtls
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,15 +32,10 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch2-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-objdump.exe")
-endif()
-
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/esp-proj/esp32-neopixel/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
-  include("C:/esp-proj/esp32-neopixel/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("C:/esp32/GitHub/esp32-neopixel/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("C:/esp32/GitHub/esp32-neopixel/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
 
 endif()
 
