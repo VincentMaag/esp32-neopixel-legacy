@@ -23,7 +23,7 @@
 					"${env:windir}\\Sysnative\\cmd.exe",
 					"${env:windir}\\System32\\cmd.exe"
 				],
-				"args": ["/k", "C:/.espressif/idf_cmd_init.bat"],
+				"args": ["/k", "C:/esp32_idf/esp-idf_4_0/export.bat"],
 				"icon": "terminal-cmd"
 			},
 		},
